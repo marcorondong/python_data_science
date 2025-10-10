@@ -33,9 +33,13 @@ def main():
 		if len(sys.argv) == 2 and sys.argv[1] != "":
 			txt = sys.argv[1]
 		else:
-			txt = input("What is the text to count?\n")
+			# txt = input("What is the text to count?\n")
+			print("What is the text to count?")
+			txt = sys.stdin.readline()
 			while len(txt) == 0:
-				txt = input("What is the text to count?\n")
+				# txt = input("What is the text to count?\n")
+				print("What is the text to count?")
+				txt = sys.stdin.readline()
 		get_stats(txt)
 
 	except AssertionError as error:
