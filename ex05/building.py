@@ -27,48 +27,6 @@ def get_stats(txt):
 	print(f"{stats['space']} {plural('space', stats['space'])}")
 	print(f"{stats['digit']} {plural('digit', stats['digit'])}")
 
-# def main():
-# 	try:
-# 		assert len(sys.argv) < 3, "more than one argument is provided"
-# 		if len(sys.argv) == 2 and sys.argv[1] != "":
-# 			txt = sys.argv[1]
-# 		else:
-# 			while True:
-# 				print("What is the text to count?")
-# 				line = sys.stdin.readline()
-# 				if line == "":          # EOF (Ctrl-D/Z) on empty buffer -> no more input
-# 					txt = ""            # process empty string (or handle as you prefer)
-# 					print("\n")
-# 					break
-# 				if line == "\n":        # user pressed Enter on empty line -> ask again
-# 					continue
-# 				txt = line              # may include '\n' (Enter) or not (text + Ctrl-D)
-# 				break
-
-# 			get_stats(txt)
-
-# 	except AssertionError as error:
-# 		print(F"AssertionError: {error}")
-
-# def main():
-# 	try:
-# 		assert len(sys.argv) < 3, "more than one argument is provided"
-# 		if len(sys.argv) == 2 and sys.argv[1] != "":
-# 			txt = sys.argv[1]
-# 		else:
-# 			print("What is the text to count?")
-# 			txt_parts = []
-# 			while True:
-# 				line = sys.stdin.readline()
-# 				if line == "":          # EOF detected (Ctrl+D / Ctrl+Z)
-# 					break
-# 			txt_parts.append(line)
-# 			txt = "".join(txt_parts)
-# 		get_stats(txt)
-
-# 	except AssertionError as error:
-# 		print(F"AssertionError: {error}")
-
 def main():
 	try:
 		assert len(sys.argv) < 3, "more than one argument is provided"
