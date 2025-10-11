@@ -2,6 +2,7 @@ import sys as sys
 
 def plural(word, count):
 	return word + ('s' if count != 1 else '')
+plural.__doc__ = "Helper function that returns singular or plural word depending on the count"
 
 def get_stats(txt):
 	stats = {
@@ -26,6 +27,7 @@ def get_stats(txt):
 	print(f"{stats['punctuation']} punctuation marks")
 	print(f"{stats['space']} {plural('space', stats['space'])}")
 	print(f"{stats['digit']} {plural('digit', stats['digit'])}")
+get_stats.__doc__ = "Helper function to process text and count chars, upper letters, lower, spaces, digits and punctuation marks"
 
 def main():
 	try:
@@ -44,6 +46,9 @@ def main():
 
 	except AssertionError as error:
 		print(F"AssertionError: {error}")
+	except Exception as e:
+		print(f"Error: {type(e).__name__}: {e}")
+main.__doc__ = "main function that reads text from args or stdin and process it with helper function get_stats()"
 
 if __name__ == "__main__":
 	main()
