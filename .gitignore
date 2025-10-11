@@ -1,1 +1,8 @@
+#################################### Python ###################################
 __pycache__
+
+### Cache & Temporary Files ###
+**/__pycache__/
+
+### Virtual Environments ###
+**/.venv/
