@@ -33,7 +33,7 @@ def extract_even(number):
 
 def main():
     numbers = [1, 3, 10, 45, 6, 50]
-    whatever = 424242
+    whatever = "424242"
     # print(list(ft_filter(extract_even, numbers)))
     # print(list(ft_filter(lambda n: n % 2 == 0, numbers)))
     print(list(ft_filter(lambda n: n % 2 == 0, whatever)))
