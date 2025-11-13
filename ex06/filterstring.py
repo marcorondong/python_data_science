@@ -11,11 +11,10 @@ def main():
     """
     try:
         assert len(sys.argv) == 3, "the arguments are bad"
-        text = sys.argv[1]
+        text = sys.argv[1]  # arguments are always received as strings
         word_length = int(sys.argv[2])
-        # TODO: Maybe I don't need to check for type, but if it's empty
-        if not isinstance(text, str):
-            raise TypeError("the arguments are bad")
+        # Check for empty strings
+        assert text.strip(), "the arguments are bad"
         # word_list = text.split() # This is NOT a list comprehension
         # Below is a list comprehension. It reads like this:
         # For each item named w in text.split(), put w into the resulting list.
