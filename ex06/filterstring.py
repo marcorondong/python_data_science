@@ -1,6 +1,7 @@
 import sys as sys
 from ft_filter import ft_filter
 
+
 def main():
     """
     main function which recoded ft_filter function to return a list
@@ -14,23 +15,22 @@ def main():
         word_length = int(sys.argv[2])
         if not isinstance(text, str):
             raise TypeError("the arguments are bad")
-        # word_list = text.split()
-        words = [w for w in text.split()] # This is a list comprehension
-        # Need to create lambda expression outside filter, because filter calls the predicate with one argument
-        pred = lambda w: len(w) > word_length
-        # print(list(ft_filter(extract_even, numbers)))
-        # print(list(ft_filter(lambda n: n % 2 == 0, numbers)))
-        # print(list(ft_filter(lambda n, word_length: len(n) > word_length == 0, word_list)))
-        print(list(ft_filter(pred, words)))
+        # word_list = text.split() # This is NOT a list comprehension
+        # Below is a list comprehension. It reads like this:
+        # For each item named w in text.split(), put w into the resulting list.
+        words = [w for w in text.split()]
+        # Note: word_length is "passed" to lambda since it's in inner scope
+        print(list(ft_filter(lambda w: len(w) > word_length, words)))
 
     except AssertionError as error:
         print(F"AssertionError: {error}")
     except TypeError as error:
         print(F"AssertionError: {error}")
-    except ValueError as error:
+    except ValueError:
         print("AssertionError: the arguments are bad")
     except Exception as error:
         print(f"Error: {type(error).__name__}: {error}")
+
 
 if __name__ == "__main__":
     main()
