@@ -13,6 +13,7 @@ def main():
         assert len(sys.argv) == 3, "the arguments are bad"
         text = sys.argv[1]
         word_length = int(sys.argv[2])
+        # TODO: Maybe I don't need to check for type, but if it's empty
         if not isinstance(text, str):
             raise TypeError("the arguments are bad")
         # word_list = text.split() # This is NOT a list comprehension
@@ -27,7 +28,7 @@ def main():
     except TypeError as error:
         print(F"AssertionError: {error}")
     except ValueError:
-        print("AssertionError: the arguments are bad")
+        print("AssertionError: the arguments are bad")  # If length is not int
     except Exception as error:
         print(f"Error: {type(error).__name__}: {error}")
 
