@@ -2,6 +2,12 @@ import sys as sys
 from ft_filter import ft_filter
 
 def main():
+    """
+    main function which recoded ft_filter function to return a list
+    with the words of a text which length is greater than N
+    1st arg: string (S). The text to analyse
+    2nd arg: integer (N). The min length of each word (greater than N)
+    """
     try:
         assert len(sys.argv) == 3, "the arguments are bad"
         text = sys.argv[1]
