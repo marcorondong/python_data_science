@@ -4,7 +4,7 @@ from ft_filter import ft_filter
 
 def main():
     """
-    main function which recoded ft_filter function to return a list
+    main function which uses recoded ft_filter function to return a list
     with the words of a text which length is greater than N
     1st arg: string (S). The text to analyse
     2nd arg: integer (N). The min length of each word (greater than N)
