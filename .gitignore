@@ -5,3 +5,15 @@
 
 ### Virtual Environments ###
 **/.venv/
+**/.test_venv/
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+.eggs/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
