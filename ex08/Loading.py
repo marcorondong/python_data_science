@@ -1,34 +1,5 @@
-# class ProgressBar:
-#     def __init__(self, ends = "|", body = "=", pointer = ">", intervals = 20):
-#         self.ends      = ends
-#         self.body      = body
-#         self.pointer   = pointer
-#         self.bucket    = 100//intervals
-#         self.progress  = 0
-#         self.intervals = intervals
-    
-#     def update(self, completion):
-#         bodies = int(completion // self.bucket)
-#         string = self.ends
-#         string += self.body*bodies
-#         string += self.pointer
-#         string += " "*(self.intervals-bodies+1)
-#         string += self.ends
-#         return string
-
-# def ft_tqdm(lst: range):
-#     bar = ProgressBar()
-#     total = len(lst)
-#     for iters in lst:
-#         progress = (iters+1)*100/total
-#         print(f"Custom tqdm: {iters+1} / {total} {bar.update(progress)} {progress:.2f}% Done", end="\r")
-#         yield progress
-
-# def ft_tqdm(lst: range) -> None:
-#     total = len(lst)
-#     i = 0
-
 import os
+
 
 def ft_tqdm(lst: range) -> None:
     # Get total elements and check for invalid
