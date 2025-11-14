@@ -2,6 +2,11 @@ import os
 
 
 def ft_tqdm(lst: range) -> None:
+    """
+    function that mimics tqdm function
+    It takes an iterable and prints a progress bar while it loops through it
+    It yields the current element of the loop
+    """
     # Get total elements and check for invalid
     total = len(lst)
     if total == 0:
