@@ -1,7 +1,5 @@
 def NULL_not_found(object: any) -> int:
-	Nothing = None
-	# if isinstance(object, None):
-	# if object == Nothing:
+	# if isinstance(object, None): This is invalid. to be valid should be isinstance(object, type(None))
 	if object is None:
 		print(f"Nothing: {object} {type(object)}")
 		return 0
@@ -15,6 +13,7 @@ def NULL_not_found(object: any) -> int:
 		if len(object) == 0:
 			print(f"Empty:{object} {type(object)}")
 			return 0
+	# Bool is a subclass of int so i must check it before int
 	elif isinstance(object,bool):
 		# Can I do this? Or I need to do object == False
 		if not object:
@@ -24,6 +23,6 @@ def NULL_not_found(object: any) -> int:
 		if object == 0:
 			print(f"Zero: {object} {type(object)}")
 			return 0
-	# else:
+
 	print("Type not Found")
 	return 1
