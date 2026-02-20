@@ -1,4 +1,4 @@
-import os
+import os as os
 
 
 def ft_tqdm(lst: range) -> None:
