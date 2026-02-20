@@ -11,6 +11,7 @@ EX04 = ex04/whatis.py
 EX05 = ex05/building.py
 EX06 = ex06/filterstring.py
 EX07 = ex07/sos.py
+EX08 = ex08/tester.py
 
 EXERCISES = ex00 ex01 ex02 ex03 ex04 ex05 ex06 ex07 ex08 ex09
 SEPARATOR = \n========== $@ ==========\n
@@ -65,6 +66,10 @@ ex07:
 	@printf "$(SEPARATOR)"
 	$(PYTHON) $(EX07) "sos" $(POST_PROCESS)
 	$(PYTHON) $(EX07) 'h$$llo' $(POST_PROCESS)
+
+ex08:
+	@printf "$(SEPARATOR)"
+	$(PYTHON) $(EX08)
 
 clean:
 	@echo "Cleaning Python cache files..."
