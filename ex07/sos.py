@@ -2,6 +2,11 @@ import sys as sys
 
 
 def to_morse(txt):
+    """
+    function that translate each char to morse
+    it goes char by char, uppercase the char and looks in dictionary
+    for corresponding morse representation
+    """
     NESTED_MORSE = {
         " ": "/ ",
         "A": ".- ",
@@ -52,6 +57,11 @@ def to_morse(txt):
 
 
 def main():
+    """
+    main function which uses to_morse function to translate a string
+    into its morse representation
+    1st arg: string (S). The text to translate to morse code
+    """
     try:
         assert len(sys.argv) == 2, "the arguments are bad"
         txt= sys.argv[1]
