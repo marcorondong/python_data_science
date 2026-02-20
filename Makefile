@@ -1,6 +1,17 @@
-PYTHON = python3
+# ===== Python Configuration ===== #
+PYTHON ?= python3
 POST_PROCESS = | cat -e
+VENV_DIR ?= .venv
+NORMINETTE = $(VENV_DIR)/bin/flake8
 
+# Auto-detect: use venv if available, otherwise fallback to virtualenv
+VENV_CMD := $(shell $(PYTHON) -m venv --help >/dev/null 2>&1 && echo "$(PYTHON) -m venv" || echo "$(PYTHON) -m virtualenv")
+
+PIP = $(VENV_DIR)/bin/pip
+VENV_PYTHON = $(VENV_DIR)/bin/python
+REQUIREMENTS ?= requirements.txt
+
+# ===== Exercises definitions ===== #
 EX00 = ex00/Hello.py
 EX01 = ex01/format_ft_time.py
 EX02A = ex02/tester.py
@@ -12,12 +23,14 @@ EX05 = ex05/building.py
 EX06 = ex06/filterstring.py
 EX07 = ex07/sos.py
 EX08 = ex08/tester.py
+EX09 = ex09/tester.py
 
 EXERCISES = ex00 ex01 ex02 ex03 ex04 ex05 ex06 ex07 ex08 ex09
+LINT_DIRS ?= ex05 ex06 ex07 ex08 ex09
 SEPARATOR = \n========== $@ ==========\n
 
 #------------------------------------ CODE ------------------------------------#
-.PHONY: all $(EXERCISES) clean check-doc
+.PHONY: all $(EXERCISES) clean venv install norminette clean fclean check-doc
 
 all: $(EXERCISES)
 
@@ -71,11 +84,47 @@ ex08:
 	@printf "$(SEPARATOR)"
 	$(PYTHON) $(EX08)
 
+ex09: venv
+	@printf "$(SEPARATOR)"
+	rm -rf ex09/build ex09/dist ex09/*.egg-info
+	$(PIP) install --upgrade build
+	cd ex09 && ../$(VENV_PYTHON) -m build
+	$(PIP) install --force-reinstall ex09/dist/*.whl
+	$(PIP) show -v ft_package
+	@printf "$(SEPARATOR)"
+	$(VENV_PYTHON) $(EX09)
+
+venv:
+	@if [ ! -d "$(VENV_DIR)" ]; then \
+		echo "Creating virtual environment in $(VENV_DIR)"; \
+		$(VENV_CMD) $(VENV_DIR); \
+	else \
+		echo "Virtual environment already exists"; \
+	fi
+
+install: venv
+	$(PIP) install -r $(REQUIREMENTS)
+
+norminette: venv
+	$(NORMINETTE) $(LINT_DIRS)
+
 clean:
 	@echo "Cleaning Python cache files..."
 	@find . -type d -name "__pycache__" -exec rm -rf {} +
 	@find . -type f -name "*.pyc" -delete
+	@echo "Cleaning build artifacts..."
+	@find . -path "./$(VENV_DIR)" -prune -o -type d -name "build" -exec rm -rf {} +
+	@find . -path "./$(VENV_DIR)" -prune -o -type d -name "dist" -exec rm -rf {} +
+	@find . -path "./$(VENV_DIR)" -prune -o -type d -name "*.egg-info" -exec rm -rf {} +
 	@echo "Done."
+
+fclean: clean
+	@if [ -d "$(VENV_DIR)" ]; then \
+		echo "Removing virtual environment"; \
+		rm -rf $(VENV_DIR); \
+	else \
+		echo "No virtual environment to remove"; \
+	fi
 
 check-doc:
 	$(PYTHON) tools/check_docstrings.py .
