@@ -64,7 +64,7 @@ def main():
     """
     try:
         assert len(sys.argv) == 2, "the arguments are bad"
-        txt= sys.argv[1]
+        txt = sys.argv[1]
         assert txt != "", "the arguments are bad"
         print(to_morse(txt))
 
