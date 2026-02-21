@@ -1,4 +1,4 @@
-def ft_filter(func:callable=None, iterable=None) -> list:
+def ft_filter(func:None, iterable=None):
     # Check if func is a function, and if it's callable
     if func is not None and not callable(func):
         raise TypeError(f"'{type(func).__name__}' object is not callable")
