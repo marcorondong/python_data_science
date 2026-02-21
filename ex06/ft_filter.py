@@ -11,6 +11,9 @@ def ft_filter(func:None, iterable=None):
     if func is None:
         func = bool
     return [x for x in iterable if func(x)]  # This is a list comprehension
+    # return (x for x in iterable if func(x)) # This is a generator expression
+    # Filter function returns a iterable object. But the subject requires to
+    # use a list comprehension, so I must return a list.
 
 
 ft_filter.__doc__ = filter.__doc__  # match built-in docstring
@@ -38,5 +41,5 @@ ft_filter.__doc__ = filter.__doc__  # match built-in docstring
 #     main()
 
 ###############################################################################
-# To check real filter function docsrtring, run `pydoc filter`
-# To check other docstrings, run `pydoc folder_name.file_name`
+# To check real filter function docsrtring, run `python3 -m pydoc filter`
+# To check other docstrings, run `python3 -m pydoc folder_name.file_name`
