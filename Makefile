@@ -5,7 +5,15 @@ VENV_DIR ?= .venv
 NORMINETTE = $(VENV_DIR)/bin/flake8
 
 # Auto-detect: use venv if available, otherwise fallback to virtualenv
-VENV_CMD := $(shell $(PYTHON) -m venv --help >/dev/null 2>&1 && echo "$(PYTHON) -m venv" || echo "$(PYTHON) -m virtualenv")
+# VENV_CMD := $(shell $(PYTHON) -m venv --help >/dev/null 2>&1 && echo "$(PYTHON) -m venv" || echo "$(PYTHON) -m virtualenv")
+# Auto-detect:
+# - Prefer venv ONLY if ensurepip is available (otherwise venv creation will fail on Debian/Ubuntu)
+# - Else fallback to virtualenv (command or module)
+VENV_CMD := $(shell \
+	$(PYTHON) -c "import venv, ensurepip" >/dev/null 2>&1 && echo "$(PYTHON) -m venv" || \
+	( command -v virtualenv >/dev/null 2>&1 && echo "virtualenv" ) || \
+	( $(PYTHON) -c "import virtualenv" >/dev/null 2>&1 && echo "$(PYTHON) -m virtualenv" ) \
+)
 
 PIP = $(VENV_DIR)/bin/pip
 VENV_PYTHON = $(VENV_DIR)/bin/python
@@ -94,10 +102,24 @@ ex09: venv
 	@printf "$(SEPARATOR)"
 	$(VENV_PYTHON) $(EX09)
 
+# venv:
+# 	@if [ ! -d "$(VENV_DIR)" ]; then \
+# 		echo "Creating virtual environment in $(VENV_DIR)"; \
+# 		$(VENV_CMD) $(VENV_DIR); \
+# 	else \
+# 		echo "Virtual environment already exists"; \
+# 	fi
 venv:
-	@if [ ! -d "$(VENV_DIR)" ]; then \
+	@if [ ! -x "$(PIP)" ]; then \
 		echo "Creating virtual environment in $(VENV_DIR)"; \
-		$(VENV_CMD) $(VENV_DIR); \
+		rm -rf "$(VENV_DIR)"; \
+		if [ -z "$(VENV_CMD)" ]; then \
+			echo "Error: cannot create venv. Need either:"; \
+			echo "  - python venv with ensurepip (Debian/Ubuntu: install python3-venv)"; \
+			echo "  - or virtualenv installed"; \
+			exit 1; \
+		fi; \
+		$(VENV_CMD) "$(VENV_DIR)"; \
 	else \
 		echo "Virtual environment already exists"; \
 	fi
